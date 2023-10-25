@@ -1,0 +1,30 @@
+DATA:
+  data_root: E:\datasets\modelnet40_normal_resampled
+  num_point: 1024
+  num_category: 40
+  extra_feature_channels: 3
+
+TRAIN:
+  train_gpu: [0, 1]
+  train_workers: 12  # data loader workers
+  train_batch_size: 4 # 16  # batch size for training
+  train_batch_size_val: 4 # 16 # batch size for validation during training, memory and speed tradeoff
+
+  start_epoch: 0
+  epochs: 250
+
+  learning_rate: 0.00001
+  weight_decay: 0.0001
+
+  manual_seed:
+  save_path: runs\modelnet
+  resume:  runs\modelnet\latest.pth # path to latest checkpoint
+  best_path: runs\modelnet\best.pth
+TEST:
+  test: False # evaluate set True else set False
+  split: test  # split in [train, val and test]
+  test_gpu: [0]
+  test_workers: 12
+  test_batch_size: 32
+  model_path: runs\modelnet\best.pth
+  save_folder: runs\modelnet\evaluate  # results save folder
